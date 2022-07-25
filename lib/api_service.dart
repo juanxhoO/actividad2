@@ -17,4 +17,17 @@ class ApiService {
       log(e.toString());
     }
   }
+
+  Future<List<Users>?> postUser() async {
+    try {
+      var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.usersEndpoint);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        List<Users> _model = usersFromJson(response.body);
+        return _model;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
